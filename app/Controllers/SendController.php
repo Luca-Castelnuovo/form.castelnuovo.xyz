@@ -13,13 +13,14 @@ use Exception;
 class SendController extends Controller
 {
     /**
-     * Send mail from JSON or FormData.
+     * Handle submission for both types of data
      *
      * @param object $request
+     * @param string $id
      *
-     * @return Json|Redirect
+     * @return void
      */
-    public function send($request, $id)
+    private function handleSubmission($request, $id)
     {
         $site = DB::get('sites', ['user_email', 'domain'], [
             'id' => $id,
@@ -70,9 +71,8 @@ class SendController extends Controller
         );
     }
 
-    // TODO: remove once middleware is finished
     /**
-     * Send mail from Form data.
+     * Send mail from FormData.
      *
      * @param object $request
      *
@@ -80,47 +80,7 @@ class SendController extends Controller
      */
     public function form($request, $id)
     {
-        $site = DB::get('sites', ['user_email', 'domain'], [
-            'id' => $id,
-        ]);
-
-        if (!$site) {
-            return $this->respondJson(
-                'Invalid sitekey',
-                [],
-                401
-            );
-        }
-
-        if (Request::origin() !== $site['domain']) {
-            return $this->respondJson(
-                'Submitting data from ' . Request::origin() . ' is not supported.',
-                [],
-                400
-            );
-        }
-
-        try {
-            MailHelper::send(
-                $site['user_email'],
-                $request->data->subject,
-                Twig::renderFromText(Config::get('smtp.template'), (array) $request->data),
-                Config::get('app.name'),
-                $request->data->email
-            );
-        } catch (Exception $e) {
-            return $this->respondJson(
-                'Mail Error',
-                $e->getMessage(),
-                400
-            );
-        }
-
-        if ($request->data->redirect) {
-            return $this->redirect($request->data->redirect);
-        }
-
-        return $this->redirect('https://example.com');
+        return $this->handleSubmission($request, $id);
     }
 
     /**
@@ -132,44 +92,6 @@ class SendController extends Controller
      */
     public function api($request, $id)
     {
-        $site = DB::get('sites', ['user_email', 'domain'], [
-            'id' => $id,
-        ]);
-
-        if (!$site) {
-            return $this->respondJson(
-                'Invalid sitekey',
-                [],
-                401
-            );
-        }
-
-        if (Request::origin() !== $site['domain']) {
-            return $this->respondJson(
-                'Submitting data from ' . Request::origin() . ' is not supported.',
-                [],
-                400
-            );
-        }
-
-        try {
-            MailHelper::send(
-                $site['user_email'],
-                $request->data->subject,
-                Twig::renderFromText(Config::get('smtp.template'), (array) $request->data),
-                Config::get('app.name'),
-                $request->data->email
-            );
-        } catch (Exception $e) {
-            return $this->respondJson(
-                'Mail Error',
-                $e->getMessage(),
-                400
-            );
-        }
-
-        return $this->respondJson(
-            'Mail sent',
-        );
+        return $this->handleSubmission($request, $id);
     }
 }
