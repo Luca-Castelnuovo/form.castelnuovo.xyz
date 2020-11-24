@@ -32,6 +32,48 @@ For deployment
 4. `php cubequence app:key`
 5. `php cubequence db:migrate`
 
+## Examples
+
+**Form**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<form action="https://form.castelnuovo.xyz/form/d6dc8ede-690c-4446-80bd-d4942c8e1a67" method="post">
+
+    <input type="hidden" name="subject" value="Pied Piper"/>
+    <input type="hidden" name="redirect" value="https://example.com/thank_you"/>
+
+    <!-- Replace these inputs with your own. Make sure they have a "name" attribute! -->
+    <input type="text" name="name" value="Richard Hendricks"/>
+    <input type="email" name="email" value="richard@piedpiper.com"/>
+
+    <button type="submit">Submit</button>
+
+</form>
+</body>
+</html>
+```
+
+**API**
+```
+curl --request POST \
+  --url https://form.castelnuovo.xyz/api/1eb2ea99-f02b-69c6-93af-010063756265 \
+  --header 'Content-Type: application/json' \
+  --header 'Origin: localhost' \
+  --data '{
+	"subject": "fooBar Subject",
+	"name": "Foo Bar",
+	"email": "foor@bar.com"
+}'
+```
+
 ## Security Vulnerabilities
 
 Please review [our security policy](https://github.com/Luca-Castelnuovo/form/security/policy) on how to report security vulnerabilities.
