@@ -6,18 +6,31 @@
 
         <div class="row mb-0">
             <pre>
-<code class="html">&lt;form action=&quot;https://form.castelnuovo.xyz/form/<span id="code_site_id"></span>&quot; method=&quot;post&quot;&gt;
+<code class="html">&lt;form action=&quot;https://form.castelnuovo.xyz/form/<span id="code_form"></span>&quot; method=&quot;post&quot;&gt;
 
-    &lt;input type=&quot;hidden&quot; name=&quot;subject&quot; value=&quot;email subject&quot;/&gt;
+    &lt;input type=&quot;hidden&quot; name=&quot;subject&quot; value=&quot;Pied Piper&quot;/&gt;
     &lt;input type=&quot;hidden&quot; name=&quot;redirect&quot; value=&quot;https://example.com/thankyou&quot;/&gt;
 
     &lt;!-- Replace these inputs with your own. Make sure they have a &quot;name&quot; attribute! --&gt;
     &lt;input type=&quot;text&quot; name=&quot;name&quot; value=&quot;Richard Hendricks&quot;/&gt;
-    &lt;input type=&quot;email&quot; name=&quot;email&quot; value=&quot;replyto@email.com&quot;/&gt;
+    &lt;input type=&quot;email&quot; name=&quot;email&quot; value=&quot;richard@piedpiper.com&quot;/&gt;
 
     &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
 
 &lt;/form&gt;</code>
+            </pre>
+        </div>
+
+        <div class="row mb-0">
+            <pre>
+<code class="bash">curl --request POST \
+  --url https://form.castelnuovo.xyz/api/<span id="code_api"></span> \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"subject": "Pied Piper",
+	"name": "Richard Hendriks",
+	"email": "richard@piedpiper.com"
+}'</code>
             </pre>
         </div>
     </div>

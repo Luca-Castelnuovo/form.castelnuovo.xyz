@@ -17,7 +17,8 @@ const codeSite = id => {
     const elem = document.querySelector('#code');
     const instance = M.Modal.getInstance(elem);
 
-    document.querySelector("#code_site_id").textContent = id;
+    document.querySelector("#code_form").textContent = id;
+    document.querySelector("#code_api").textContent = id;
     instance.open();
 }
 
