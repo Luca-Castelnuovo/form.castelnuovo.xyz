@@ -28,4 +28,4 @@ Middleware::create(['prefix' => '/site', 'middleware' => [Session::class]], func
 });
 
 Route::post('/send/{id}', 'SendController@form', Form::class);
-// TODO: Route::post('/api/{id}', 'SendController@api', JSON::class);
+Route::post('/api/{id}', 'SendController@api', JSON::class);

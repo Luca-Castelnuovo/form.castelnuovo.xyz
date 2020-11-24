@@ -18,6 +18,7 @@ $config->attach('cache');
 $config->attach('cors');
 $config->attach('database');
 $config->attach('roles');
+$config->attach('smtp');
 
 // Debug Helper
 if (App::debug()) {
