@@ -27,5 +27,6 @@ Middleware::create(['prefix' => '/site', 'middleware' => [Session::class]], func
     Route::delete('/{id}', 'SiteController@delete');
 });
 
+Route::get('/form/success', 'SendController@success');
 Route::post('/form/{id}', 'SendController@form', Form::class);
 Route::post('/api/{id}', 'SendController@api', JSON::class);

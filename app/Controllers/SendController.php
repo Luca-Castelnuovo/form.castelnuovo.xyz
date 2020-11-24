@@ -13,6 +13,40 @@ use Exception;
 class SendController extends Controller
 {
     /**
+     * Show mail sent successfully page
+     *
+     * @return Html`
+     */
+    public function success()
+    {
+        return $this->respond('success.twig');
+    }
+
+    /**
+     * Send mail from FormData.
+     *
+     * @param object $request
+     *
+     * @return Json|Redirect
+     */
+    public function form($request, $id)
+    {
+        return $this->handleSubmission($request, $id);
+    }
+
+    /**
+     * Send mail from JSON data.
+     *
+     * @param object $request
+     *
+     * @return Json
+     */
+    public function api($request, $id)
+    {
+        return $this->handleSubmission($request, $id);
+    }
+
+    /**
      * Handle submission for both types of data
      *
      * @param object $request
@@ -63,35 +97,11 @@ class SendController extends Controller
                 return $this->redirect($request->data->redirect);
             }
 
-            return $this->redirect('https://example.com');
+            return $this->redirect('/form/success');
         }
 
         return $this->respondJson(
             'Mail sent',
         );
-    }
-
-    /**
-     * Send mail from FormData.
-     *
-     * @param object $request
-     *
-     * @return Json|Redirect
-     */
-    public function form($request, $id)
-    {
-        return $this->handleSubmission($request, $id);
-    }
-
-    /**
-     * Send mail from JSON data.
-     *
-     * @param object $request
-     *
-     * @return Json
-     */
-    public function api($request, $id)
-    {
-        return $this->handleSubmission($request, $id);
     }
 }
