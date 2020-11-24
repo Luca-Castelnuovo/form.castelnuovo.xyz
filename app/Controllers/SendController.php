@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CQ\Controllers\Controller;
 use CQ\DB\DB;
+use CQ\Helpers\Request;
 
 class SendController extends Controller
 {
@@ -20,21 +21,24 @@ class SendController extends Controller
             'id' => $id,
         ]);
 
-        // validate domain
+        if (Request::origin() !== $site['domain']) {
+            return $this->respondJson(
+                'Submitting data from ' . Request::origin() . ' is not supported.',
+                [],
+                400
+            );
+        }
 
         // subject, email, redirect
 
         // create email
-        // TODO: ignore multipart form, ignore input file
 
         // send email
 
-        // if ($request->data->redirect) {
-        //     return $this->redirect($request->data->redirect);
-        // }
+        if ($request->data->redirect) {
+            return $this->redirect($request->data->redirect);
+        }
 
-        // return $this->redirect('https://example.com/thank_you');
-
-        return $this->respondJson('Email sent', $site);
+        return $this->redirect('https://example.com');
     }
 }

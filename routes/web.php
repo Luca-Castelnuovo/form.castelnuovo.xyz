@@ -1,10 +1,10 @@
 <?php
 
 use CQ\Middleware\JSON;
+use CQ\Middleware\Form;
 use CQ\Middleware\Session;
 use CQ\Routing\Middleware;
 use CQ\Routing\Route;
-use App\Middleware\FormMiddleware;
 
 Route::$router = $router->get();
 Middleware::$router = $router->get();
@@ -27,5 +27,5 @@ Middleware::create(['prefix' => '/site', 'middleware' => [Session::class]], func
     Route::delete('/{id}', 'SiteController@delete');
 });
 
-Route::post('/send/{id}', 'SendController@form', FormMiddleware::class);
-// Route::post('/api/{id}', 'SendController@api', JSON::class);
+Route::post('/send/{id}', 'SendController@form', Form::class);
+// TODO: Route::post('/api/{id}', 'SendController@api', JSON::class);
