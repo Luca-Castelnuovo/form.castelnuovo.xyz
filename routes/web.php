@@ -1,10 +1,10 @@
 <?php
 
 use CQ\Middleware\JSON;
-use CQ\Middleware\RateLimit;
 use CQ\Middleware\Session;
 use CQ\Routing\Middleware;
 use CQ\Routing\Route;
+use App\Middleware\FormMiddleware;
 
 Route::$router = $router->get();
 Middleware::$router = $router->get();
@@ -22,9 +22,10 @@ Middleware::create(['middleware' => [Session::class]], function () {
     Route::get('/dashboard', 'UserController@dashboard');
 });
 
-Middleware::create(['prefix' => '/example', 'middleware' => [RateLimit::class]], function () {
-    Route::get('', 'ExampleController@index');
-    Route::post('', 'ExampleController@create', JSON::class);
-    Route::patch('/{id}', 'ExampleController@update', JSON::class);
-    Route::delete('/{id}', 'ExampleController@delete');
+Middleware::create(['prefix' => '/site', 'middleware' => [Session::class]], function () {
+    Route::post('', 'SiteController@create', JSON::class);
+    Route::delete('/{id}', 'SiteController@delete');
 });
+
+Route::post('/send/{id}', 'SendController@form', FormMiddleware::class);
+// Route::post('/api/{id}', 'SendController@api', JSON::class);

@@ -34,9 +34,9 @@ class CreateSitesTable extends Migration
         $sites = $this->table('sites', ['id' => false, 'primary_key' => 'id']);
         $sites->addColumn('id', 'uuid')
             ->addColumn('user_id', 'uuid')
-            ->addColumn('user_email', 'string', ['limit' => 2048, 'null' => false])
-            ->addColumn('name', 'string', ['limit' => 2048, 'null' => false])
-            ->addColumn('domains', 'string', ['default' => 'localhost', 'null' => false])
+            ->addColumn('user_email', 'string')
+            ->addColumn('name', 'string', ['limit' => 2048])
+            ->addColumn('domain', 'string')
             ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->create()

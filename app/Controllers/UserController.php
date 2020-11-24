@@ -15,16 +15,11 @@ class UserController extends Controller
      */
     public function dashboard()
     {
-        $sites = DB::select('sites', ['id', 'user_id', 'user_email', 'name', 'domains'], [
+        $sites = DB::select('sites', ['id', 'name', 'domain'], [
             'user_id' => User::getId(),
             'ORDER' => ['name' => 'ASC'],
         ]);
 
         return $this->respond('dashboard.twig', ['sites' => $sites]);
-
-        // return $this->respondJson('Data', [
-        //     'sites' => $sites,
-        //     'session' => $_SESSION,
-        // ]);
     }
 }
