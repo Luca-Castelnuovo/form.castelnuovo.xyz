@@ -17,7 +17,7 @@ const codeSite = id => {
     const elem = document.querySelector('#code');
     const instance = M.Modal.getInstance(elem);
 
-    // set text correct id (select span and set value on span)
+    document.querySelector("#code_site_id").textContent = id;
     instance.open();
 }
 

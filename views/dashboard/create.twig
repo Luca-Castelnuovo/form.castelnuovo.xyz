@@ -2,10 +2,16 @@
     <div class="modal-content">
         <h4>Create Site</h4>
         <div class="row mb-0">
-            <div class="input-field col s12 mb-0">
+            <div class="input-field col s12">
                 <input id="name" name="name" type="text" class="validate" required>
                 <label for="name">Site Name</label>
                 <span class="helper-text" data-error="Valid site name is required"></span>
+            </div>
+
+            <div class="input-field col s12 mb-0">
+                <input id="domains" name="domains" type="text" class="validate" placeholder="example.com,localhost" required>
+                <label for="domains">Site Domains</label>
+                <span class="helper-text" data-error="Valid domain(s) are required"></span>
             </div>
         </div>
     </div>
