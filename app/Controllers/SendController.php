@@ -6,6 +6,7 @@ use CQ\Controllers\Controller;
 use CQ\DB\DB;
 use CQ\Helpers\Request;
 use CQ\Response\Twig;
+use CQ\Helpers\Session;
 use App\Helpers\MailHelper;
 use CQ\Config\Config;
 use Exception;
@@ -19,9 +20,12 @@ class SendController extends Controller
      */
     public function success()
     {
-        // TODO: add redirect param
+        $redirect = Session::get('redirect');
+        Session::unset('redirect');
 
-        return $this->respond('success.twig');
+        return $this->respond('success.twig', [
+            'redirect' => $redirect,
+        ]);
     }
 
     /**
@@ -58,7 +62,7 @@ class SendController extends Controller
      */
     private function handleSubmission($request, $id)
     {
-        $site = DB::get('sites', ['user_email', 'domain'], [
+        $site = DB::get('sites', ['name', 'user_email', 'domain'], [
             'id' => $id,
         ]);
 
@@ -81,11 +85,18 @@ class SendController extends Controller
         //     );
         // }
 
+        $app_name = Config::get('app.name');
+        $template_data = (array) $request->data;
+        unset($template_data['redirect']);
+
         try {
             MailHelper::send(
                 $site['user_email'],
-                $request->data->subject,
-                Twig::renderFromText(Config::get('smtp.template'), (array) $request->data),
+                "[{$app_name}] {$request->data->subject}",
+                Twig::renderFromText(Config::get('smtp.template'), [
+                    'name' => $site['name'],
+                    'data' => $template_data,
+                ]),
                 Config::get('app.name'),
                 $request->data->email
             );
@@ -99,7 +110,7 @@ class SendController extends Controller
 
         if (Request::isForm($request)) {
             if ($request->data->redirect) {
-                return $this->redirect($request->data->redirect);
+                Session::set('redirect', $request->data->redirect);
             }
 
             return $this->redirect('/form/success');
