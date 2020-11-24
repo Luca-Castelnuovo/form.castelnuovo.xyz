@@ -1,7 +1,7 @@
 {
-  "name": "CubeQuence",
-  "short_name": "CubeQuence",
-  "description": "CubeQuence is a ultra-Light custom php framework",
+  "name": "FormJS",
+  "short_name": "FormJS",
+  "description": "Backend for email submissions powering serverless applications",
   "start_url": "/",
   "background_color": "#000000",
   "theme_color": "#0f4a73",

@@ -2,9 +2,9 @@
 
 return [
     'user' => [
-        'fooBar' => 100,
+        'sites' => 1,
     ],
     'admin' => [
-        'fooBar' => 200,
+        'sites' => 200,
     ],
 ];

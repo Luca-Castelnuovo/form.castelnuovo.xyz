@@ -2,7 +2,7 @@
 
 use CQ\DB\Seeder;
 
-class ExampleSeeder extends Seeder
+class SitesSeeder extends Seeder
 {
     /**
      * Run Method.
@@ -20,12 +20,15 @@ class ExampleSeeder extends Seeder
         for ($i = 0; $i < 5; ++$i) {
             $data[] = [
                 'id' => $faker->uuid,
-                'string' => $faker->sentence,
+                'user_id' => $faker->uuid,
+                'user_email' => $faker->email,
+                'name' => $faker->domainName,
+                'domains' => $faker->domainName,
                 'updated_at' => date('Y-m-d H:i:s'),
                 'created_at' => date('Y-m-d H:i:s'),
             ];
         }
 
-        $this->table('example')->insert($data)->saveData();
+        $this->table('sites')->insert($data)->saveData();
     }
 }

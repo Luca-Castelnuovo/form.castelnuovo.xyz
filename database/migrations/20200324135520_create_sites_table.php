@@ -2,7 +2,7 @@
 
 use CQ\DB\Migration;
 
-class CreateExampleTable extends Migration
+class CreateSitesTable extends Migration
 {
     /**
      * Change Method.
@@ -31,9 +31,12 @@ class CreateExampleTable extends Migration
      */
     public function change()
     {
-        $example = $this->table('example', ['id' => false, 'primary_key' => 'id']);
-        $example->addColumn('id', 'uuid')
-            ->addColumn('string', 'string', ['limit' => 2048, 'null' => false])
+        $sites = $this->table('sites', ['id' => false, 'primary_key' => 'id']);
+        $sites->addColumn('id', 'uuid')
+            ->addColumn('user_id', 'uuid')
+            ->addColumn('user_email', 'string', ['limit' => 2048, 'null' => false])
+            ->addColumn('name', 'string', ['limit' => 2048, 'null' => false])
+            ->addColumn('domains', 'string', ['default' => 'localhost', 'null' => false])
             ->addColumn('updated_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->addColumn('created_at', 'datetime', ['default' => 'CURRENT_TIMESTAMP'])
             ->create()

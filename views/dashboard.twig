@@ -1,8 +1,51 @@
 {% extends "partials/base.twig" %}
-{% set title = "CubeQuence" %}
+{% set title = "Dashboard" %}
 {% set page_script = "/assets/js/dashboard.js" %}
+{% set page_css = "/assets/css/highlight.css" %}
 
 {% block content %}
-<h3>CubeQuence Dashboard!</h3>
-<img src="/assets/img/logo.png" alt="Logo">
+
+{% include 'dashboard/code.twig' %}
+{% include 'dashboard/create.twig' %}
+
+<div class="row">
+    <h3 class="col s12">
+        Sites
+        <button class="btn waves-effect waves-light modal-trigger" data-target="site">
+            Create Site
+        </button>
+
+    </h3>
+
+    {% if not sites %}
+        <h5 class="col s12">No sites found!</h5>
+    {% endif %}
+
+    {% for site in sites %}
+        <div class="col s12 m6">
+            <div class="card horizontal">
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <p>ID: <span class="bold">{{ site.id }}</span></p>
+                        <p>user_id: <span class="bold">{{ site.user_id }}</span></p>
+                        <p>user_email: <span class="bold">{{ site.user_email }}</span></p>
+                        <p>Name: <span class="bold">{{ site.name }}</span></p>
+                        <p>Domains: <span class="bold">{{ site.domains }}</span></p>
+                    </div>
+
+                    <div class="card-action">
+                        <button class="btn-small waves-effect waves-light" onClick="codeSite('{{ site.id }}')">
+                            Placement Code
+                        </button>
+
+                        <button class="btn-small waves-effect waves-light right" onClick="deleteSite('{{ site.id }}')">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

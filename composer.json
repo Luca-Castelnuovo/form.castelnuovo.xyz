@@ -1,8 +1,8 @@
 {
-    "name": "cubequence/cubequence",
-    "description": "The CubeQuence Framework",
+    "name": "luca-castelnuovo/form",
+    "description": "Backend for email submissions powering serverless applications",
     "keywords": [
-        "framework",
+        "formjs",
         "cubequence"
     ],
     "license": "MIT",
@@ -37,7 +37,7 @@
         ]
     },
     "support": {
-        "issues": "https://github.com/CubeQuence/CubeQuence/issues",
-        "source": "https://github.com/CubeQuence/CubeQuence"
+        "issues": "https://github.com/Luca-Castelnuovo/Form/issues",
+        "source": "https://github.com/Luca-Castelnuovo/Form"
     }
 }
