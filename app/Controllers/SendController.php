@@ -68,13 +68,13 @@ class SendController extends Controller
             );
         }
 
-        if (Request::origin() !== $site['domain']) {
-            return $this->respondJson(
-                'Submitting data from ' . Request::origin() . ' is not supported.',
-                [],
-                400
-            );
-        }
+        // if (Request::origin() !== $site['domain']) {
+        //     return $this->respondJson(
+        //         'Submitting data from ' . Request::origin() . ' is not supported.',
+        //         [],
+        //         400
+        //     );
+        // }
 
         try {
             MailHelper::send(
