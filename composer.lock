@@ -328,12 +328,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CubeQuence/framework.git",
-                "reference": "017ea66e7b6091283a20f0a5edad88d7b82cf437"
+                "reference": "97f02965ddb385b6cb6cbce45372fdf641636d0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CubeQuence/framework/zipball/017ea66e7b6091283a20f0a5edad88d7b82cf437",
-                "reference": "017ea66e7b6091283a20f0a5edad88d7b82cf437",
+                "url": "https://api.github.com/repos/CubeQuence/framework/zipball/97f02965ddb385b6cb6cbce45372fdf641636d0b",
+                "reference": "97f02965ddb385b6cb6cbce45372fdf641636d0b",
                 "shasum": ""
             },
             "require": {
@@ -379,7 +379,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-11-23T12:32:45+00:00"
+            "time": "2020-11-24T15:45:19+00:00"
         },
         {
             "name": "firebase/php-jwt",

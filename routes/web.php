@@ -3,6 +3,7 @@
 use CQ\Middleware\JSON;
 use CQ\Middleware\Form;
 use CQ\Middleware\Session;
+use CQ\Middleware\RateLimit;
 use CQ\Routing\Middleware;
 use CQ\Routing\Route;
 
@@ -28,5 +29,5 @@ Middleware::create(['prefix' => '/site', 'middleware' => [Session::class]], func
 });
 
 Route::get('/form/success', 'SendController@success');
-Route::post('/form/{id}', 'SendController@form', Form::class);
-Route::post('/api/{id}', 'SendController@api', JSON::class);
+Route::post('/form/{id}', 'SendController@form', [RateLimit::class, Form::class]);
+Route::post('/api/{id}', 'SendController@api', [RateLimit::class, JSON::class]);

@@ -17,6 +17,7 @@ $config->attach('auth'); // auth.castelnuovo.xyz
 $config->attach('cache');
 $config->attach('cors');
 $config->attach('database');
+$config->attach('ratelimit');
 $config->attach('roles');
 $config->attach('smtp');
 

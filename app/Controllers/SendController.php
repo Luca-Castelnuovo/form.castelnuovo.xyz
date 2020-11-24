@@ -19,6 +19,8 @@ class SendController extends Controller
      */
     public function success()
     {
+        // TODO: add redirect param
+
         return $this->respond('success.twig');
     }
 
@@ -67,6 +69,9 @@ class SendController extends Controller
                 401
             );
         }
+
+        // TODO: find a method of authenticating the origin
+        // maybe only set CORS headers if domain is allowed
 
         // if (Request::origin() !== $site['domain']) {
         //     return $this->respondJson(

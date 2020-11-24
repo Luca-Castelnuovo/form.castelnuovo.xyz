@@ -1,6 +1,6 @@
 <?php
 
-// TODO: fix twig template
+// TODO: fix twig template, add site name to the template, make loop for all variables
 
 return [
     'host' => env('SMTP_HOST'),
