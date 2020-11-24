@@ -1,5 +1,7 @@
 <?php
 
+// TODO: fix twig template
+
 return [
     'host' => env('SMTP_HOST'),
     'port' => env('SMTP_PORT'),
