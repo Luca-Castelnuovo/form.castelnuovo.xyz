@@ -30,6 +30,16 @@ class SiteController extends Controller
             );
         }
 
+        $user_n_sites = DB::count('sites', ['user_id' => User::getId()]);
+        $max_n_sites = User::valueRole('max_sites');
+        if ($user_n_sites >= $max_n_sites) {
+            return $this->respondJson(
+                "Site quota reached, max {$max_n_sites}",
+                [],
+                400
+            );
+        }
+
         $data = [
             'id' => UUID::v6(),
             'user_id' => User::getId(),

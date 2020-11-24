@@ -2,9 +2,9 @@
 
 return [
     'user' => [
-        'sites' => 1,
+        'max_sites' => 1,
     ],
     'admin' => [
-        'sites' => 200,
+        'max_sites' => 100,
     ],
 ];
