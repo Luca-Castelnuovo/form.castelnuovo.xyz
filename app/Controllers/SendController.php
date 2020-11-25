@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CQ\DB\DB;
+use CQ\Helpers\App;
 use CQ\Helpers\Request;
 use CQ\Helpers\Session;
 use CQ\Response\Json;
@@ -50,12 +51,24 @@ class SendController extends Controller
             );
         }
 
+        if (App::debug()) {
+            return new Json([
+                'success' => true,
+                'message' => "DEBUG MODE: CORS allowed for *",
+                'data' => [],
+            ], 200, [
+                'Access-Control-Allow-Origin' => '*',
+                'Access-Control-Allow-Headers' => 'Content-Type',
+                'Access-Control-Allow-Methods' => 'OPTIONS, POST',
+            ]);
+        }
+
         return new Json([
             'success' => true,
             'message' => "CORS allowed for {$site['domain']}",
             'data' => [],
         ], 200, [
-            'Access-Control-Allow-Origin' => $site['domain'],
+            'Access-Control-Allow-Origin' => "https://{$site['domain']}",
             'Access-Control-Allow-Headers' => 'Content-Type',
             'Access-Control-Allow-Methods' => 'OPTIONS, POST',
         ]);
