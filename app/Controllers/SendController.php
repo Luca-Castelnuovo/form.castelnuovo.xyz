@@ -151,8 +151,14 @@ class SendController extends Controller
             return $this->redirect('/form/success');
         }
 
-        return $this->respondJson(
-            'Mail sent',
-        );
+        return new Json([
+            'success' => true,
+            'message' => 'Mail sent',
+            'data' => [],
+        ], 200, [
+            'Access-Control-Allow-Origin' => '*',
+            'Access-Control-Allow-Headers' => 'Content-Type',
+            'Access-Control-Allow-Methods' => 'OPTIONS, POST',
+        ]);
     }
 }
