@@ -29,5 +29,9 @@ Middleware::create(['prefix' => '/site', 'middleware' => [Session::class]], func
 });
 
 Route::get('/form/success', 'SendController@success');
+
+Route::options('/form/{id}', 'SendController@cors');
 Route::post('/form/{id}', 'SendController@form', [RateLimit::class, Form::class]);
+
+Route::options('/api/{id}', 'SendController@cors');
 Route::post('/api/{id}', 'SendController@api', [RateLimit::class, JSON::class]);

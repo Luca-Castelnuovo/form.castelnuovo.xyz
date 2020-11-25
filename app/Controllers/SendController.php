@@ -2,13 +2,14 @@
 
 namespace App\Controllers;
 
-use CQ\Controllers\Controller;
 use CQ\DB\DB;
 use CQ\Helpers\Request;
-use CQ\Response\Twig;
 use CQ\Helpers\Session;
-use App\Helpers\MailHelper;
+use CQ\Response\Json;
+use CQ\Response\Twig;
 use CQ\Config\Config;
+use CQ\Controllers\Controller;
+use App\Helpers\MailHelper;
 use Exception;
 
 class SendController extends Controller
@@ -25,6 +26,38 @@ class SendController extends Controller
 
         return $this->respond('success.twig', [
             'redirect' => $redirect,
+        ]);
+    }
+
+    /**
+     * Set CORS headers for allowed domains
+     *
+     * @param string $id
+     *
+     * @return Json
+     */
+    public function cors($id)
+    {
+        $site = DB::get('sites', ['domain'], [
+            'id' => $id,
+        ]);
+
+        if (!$site) {
+            return $this->respondJson(
+                'Invalid sitekey',
+                [],
+                401
+            );
+        }
+
+        return new Json([
+            'success' => true,
+            'message' => "CORS allowed for {$site['domain']}",
+            'data' => [],
+        ], 200, [
+            'Access-Control-Allow-Origin' => $site['domain'],
+            'Access-Control-Allow-Headers' => 'Content-Type',
+            'Access-Control-Allow-Methods' => 'OPTIONS, POST',
         ]);
     }
 
@@ -62,7 +95,7 @@ class SendController extends Controller
      */
     private function handleSubmission($request, $id)
     {
-        $site = DB::get('sites', ['name', 'user_email', 'domain'], [
+        $site = DB::get('sites', ['name', 'user_email'], [
             'id' => $id,
         ]);
 
@@ -73,17 +106,6 @@ class SendController extends Controller
                 401
             );
         }
-
-        // TODO: find a method of authenticating the origin
-        // maybe only set CORS headers if domain is allowed
-
-        // if (Request::origin() !== $site['domain']) {
-        //     return $this->respondJson(
-        //         'Submitting data from ' . Request::origin() . ' is not supported.',
-        //         [],
-        //         400
-        //     );
-        // }
 
         $app_name = Config::get('app.name');
         $template_data = (array) $request->data;
