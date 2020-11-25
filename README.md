@@ -11,6 +11,7 @@
 Backend for email submissions powering serverless applications
 
 - [Homepage](https://form.castelnuovo.xyz)
+- [SDK](https://www.npmjs.com/package/mailjs-sdk)
 
 ## Installation
 
