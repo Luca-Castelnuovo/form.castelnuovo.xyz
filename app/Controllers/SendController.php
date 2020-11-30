@@ -6,6 +6,7 @@ use CQ\DB\DB;
 use CQ\Helpers\App;
 use CQ\Helpers\Request;
 use CQ\Helpers\Session;
+use CQ\Helpers\File;
 use CQ\Response\Json;
 use CQ\Response\Twig;
 use CQ\Config\Config;
@@ -120,6 +121,7 @@ class SendController extends Controller
             );
         }
 
+        $template = new File('../views/mail.twig');
         $app_name = Config::get('app.name');
         $template_data = (array) $request->data;
         unset($template_data['redirect']);
@@ -128,7 +130,7 @@ class SendController extends Controller
             MailHelper::send(
                 $site['user_email'],
                 "[{$app_name}] {$request->data->subject}",
-                Twig::renderFromText(Config::get('smtp.template'), [
+                Twig::renderFromText($template->read(), [
                     'name' => $site['name'],
                     'data' => $template_data,
                 ]),
