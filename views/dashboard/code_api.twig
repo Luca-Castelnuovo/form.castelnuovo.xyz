@@ -1,0 +1,29 @@
+<script src="/assets/js/highlight.js"></script>
+
+<div id="modal_api" class="modal" style="max-width: unset;">
+    <div class="modal-content">
+        <h4>CURL Example</h4>
+
+        <div class="row mb-0">
+            <pre>
+<code class="bash">curl --request POST \
+  --url https://form.castelnuovo.xyz/api/<span id="code_api"></span> \
+  --header 'Content-Type: application/json' \
+  --data '{
+	"subject": "Pied Piper",
+	"name": "Richard Hendriks",
+	"email": "richard@piedpiper.com"
+	heardFrom": "ph",
+	"animal": "tarantula",
+	"likes": {
+		"pizza": "on"
+	}
+}'</code>
+            </pre>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn blue accent-4 waves-effect waves-light modal-close teal">Close</button>
+    </div>
+</div>

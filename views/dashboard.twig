@@ -5,7 +5,8 @@
 
 {% block content %}
 
-{% include 'dashboard/code.twig' %}
+{% include 'dashboard/code_html.twig' %}
+{% include 'dashboard/code_api.twig' %}
 {% include 'dashboard/create.twig' %}
 
 <div class="row">
@@ -26,18 +27,30 @@
             <div class="card horizontal">
                 <div class="card-stacked">
                     <div class="card-content">
+                        <p>ID: <span class="bold">{{ site.id }}</span></p>
                         <p class="flow-text">Name: <span class="bold">{{ site.name }}</span></p>
                         <p class="flow-text">Domain: <span class="bold">{{ site.domain }}</span></p>
                     </div>
 
                     <div class="card-action">
-                        <button class="btn-small waves-effect waves-light" onClick="codeSite('{{ site.id }}')">
-                            Placement Code
+                        <div class="cols">
+                        <button class="col s4 btn-small waves-effect waves-light" onClick="modalHtml('{{ site.id }}')">
+                            HTML
                         </button>
 
-                        <button class="btn-small waves-effect waves-light right" onClick="deleteSite('{{ site.id }}')">
+                        <div class="col s1"></div>
+
+                        <button class="col s4 btn-small waves-effect waves-light" onClick="modalApi('{{ site.id }}')">
+                            API
+                        </button>
+
+                        <div class="col s1"></div>
+
+                        <button class="col s2 btn-small waves-effect waves-light right" onClick="deleteSite('{{ site.id }}')">
                             Delete
                         </button>
+
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     M.Sidenav.init(document.querySelectorAll('.sidenav'), { edge: "right" });
-    M.Modal.init(document.querySelectorAll('.modal'), {
-        preventScrolling: false
-    });
+    M.Modal.init(document.querySelectorAll('.modal'), {});
 
     hljs.initHighlightingOnLoad();
 });
@@ -15,12 +13,18 @@ createSiteForm.addEventListener('submit', e => {
     apiUse('post', '/site', data);
 })
 
-const codeSite = id => {
-    const elem = document.querySelector('#code');
+const modalHtml = id => {
+    const elem = document.querySelector('#modal_html');
     const instance = M.Modal.getInstance(elem);
 
-    document.querySelector("#code_site").textContent = id;
-    document.querySelector("#code_form").textContent = id;
+    document.querySelector("#code_html").textContent = id;
+    instance.open();
+}
+
+const modalApi = id => {
+    const elem = document.querySelector('#modal_api');
+    const instance = M.Modal.getInstance(elem);
+
     document.querySelector("#code_api").textContent = id;
     instance.open();
 }
