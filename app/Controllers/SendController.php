@@ -12,7 +12,6 @@ use CQ\Response\Twig;
 use CQ\Config\Config;
 use CQ\Controllers\Controller;
 use App\Helpers\MailHelper;
-use Exception;
 
 class SendController extends Controller
 {
@@ -137,10 +136,10 @@ class SendController extends Controller
                 Config::get('app.name'),
                 $request->data->email
             );
-        } catch (Exception $e) {
+        } catch (\Throwable $th) {
             return $this->respondJson(
                 'Mail Error',
-                $e->getMessage(),
+                $th->getMessage(),
                 400
             );
         }

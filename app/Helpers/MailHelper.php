@@ -3,8 +3,7 @@
 namespace App\Helpers;
 
 use CQ\Config\Config;
-use Exception;
-use PHPMailer\PHPMailer\Exception as MailException;
+use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
 
 class MailHelper
@@ -18,7 +17,7 @@ class MailHelper
      * @param string fromName optional
      * @param string replyTo optional
      *
-     * @throws Exception
+     * @throws \Throwable
      *
      * @return
      */
@@ -49,8 +48,8 @@ class MailHelper
             }
 
             $mail->send();
-        } catch (MailException $e) {
-            throw new Exception($mail->ErrorInfo);
+        } catch (Exception $e) {
+            throw new \Throwable($mail->ErrorInfo);
         }
     }
 }

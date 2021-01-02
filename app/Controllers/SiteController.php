@@ -4,10 +4,9 @@ namespace App\Controllers;
 
 use App\Validators\SiteValidator;
 use CQ\Controllers\Controller;
-use CQ\DB\DB;
 use CQ\Helpers\UUID;
 use CQ\Helpers\User;
-use Exception;
+use CQ\DB\DB;
 
 class SiteController extends Controller
 {
@@ -22,10 +21,10 @@ class SiteController extends Controller
     {
         try {
             SiteValidator::create($request->data);
-        } catch (Exception $e) {
+        } catch (\Throwable $th) {
             return $this->respondJson(
                 'Provided data was malformed',
-                json_decode($e->getMessage()),
+                json_decode($th->getMessage()),
                 422
             );
         }
